@@ -1,0 +1,47 @@
+CSC 362 Programming Assignments #5
+Due Date: Friday, November 15
+
+
+These two assignments require that you implement two Intel assembly language programs
+embedded in C programs. If you are using Windows, you will have to use Visual Studio. If you
+are using a Mac, you will have to use Xcode. Otherwise, you will have to log in to the NKU 
+virtual lab to access a virtual Windows 10 computer running Visual Studio. 
+
+
+
+Program 5:    Implement the Selection Sort algorithm for an array of int values in assembly
+language. The selection sort makes n-1 passes through an array of n elements locating the
+smallest element and swapping it with the ith element. For instance, on the first pass, i=0, locate
+the smallest element in the range of j=0 to j=n-1 and swap it with array[0]. On the second pass,
+i=1, locate the smallest element in the range from j=1 to n-1 and swap it with array[1]. The
+algorithm is shown below.
+
+                for(i=0;i<n-1;i++) {
+	    min = a[i];
+	    minposition = i;
+
+	        for(j=i+1;j<n;j++) {
+	            if(a[j] < a[minposition]) {
+		min = a[j];
+		minposition = j;
+	            }
+	        }
+	        swap a[i] and a[minposition]
+	}
+
+
+
+Implement your code in assembly language with the array declared and initialized in C code
+(hardcode the array to its values rather than inputting the array for convenience), and after the
+assembly code output the sorted array in C code. Note that you may find this program tricky
+because you are limited to 4 data registers. Use only one array (do not manipulate a copy of the
+array). Run the program on the 2 data sets below.
+
+Run #1: 100, 99, 97, 95, 90, 87, 86, 83, 81, 77, 74, 69, 63, 50, 44, 43, 39, 31, 29, 12
+Run #2: 8, -1, 7, -8, 6, 3, -4, 4, 1, -2, 9, -5, 0, 2 
+
+
+
+For both programs, submit the source code and output. In both cases, the output can be added to
+your source code in comments at the bottom. Make sure your code is well-commented, as
+discussed in class.
