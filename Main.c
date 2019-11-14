@@ -6,6 +6,7 @@
 /* ----------------------------------------------- END OF FUNCTION PROTOTYPES --------------------------------------------- */
 
 
+
 // main function where program execution begins
 int main() {
 
@@ -31,7 +32,6 @@ int main() {
 	int n = (sizeof(a) / sizeof(int));
 	/* -------------------------------------------- END OF VARIABLE DECLARATIONS ---------------------------------------------- */
 
-	// printf("The number of elements in int array \"a\" = %d \n", n);
 
 	// for loop to loop through all the elements in the int array "a" and 
 		// store the minimum value in each loop in order to sort the array
@@ -65,7 +65,7 @@ int main() {
 		a[minPosition] = temp;
 	}
 
-	// for loop to print out the int array, "a"
+	// for loop to print out the now sorted int array, "a"
 	for (i = 0; i < n; i++) {
 		// print the current int element value, followed by a comma and a space to the terminal
 		printf("%d, ", a[i]);
@@ -75,6 +75,7 @@ int main() {
 	// return 0 to indicate the program executed completely with no errors
 	return 0;
 }
+
 
 
 /*
