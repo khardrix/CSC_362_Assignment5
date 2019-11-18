@@ -62,9 +62,6 @@ void main() {
 						mov ecx, n				// (ECX = n) (controls the number of loops)
 		topouter:		mov eax, a[ebx]			// (EAX = a[EBX])	/**---------------------- TOP OF OUTER FOR LOOP ----------------------**/
 						mov min, eax			// (min = a[EBX]) (used to store the current minimum value in the array "a")
-	}
-	printf("\t\tmin = %d \n", min);				// FOR TESTING PURPOSES!!!!!!! GET RID OF WHEN DONE TESTING!!!!!!!
-	__asm {
 						add ebx, 4              // (EBX += 4)
 						mov edx, i				// (EDX = i)
 						mov minPosition, edx	// (minPosition = i)
@@ -81,7 +78,7 @@ void main() {
 						mov eax, a[ebx]			// (EAX = a[minPosition])
 						mov second, eax			// (second = a[minPosition])
 						cmp first, eax			// compare "first" (a[j]) and "second" (a[minPosition])
-						jl xiftrue				// if( a[j] < a[minPosition]) then jump to "xiftrue"
+						jl xiftrue				// if(a[j] < a[minPosition]) then jump to "xiftrue"
 						mov eax, j				// (EAX = j)
 						add j, 1				// (j += 1)
 						cmp eax, n				// compare "j" (increments throughout program, always i + 1) to "n" (number of elements in "a" minus 1)
@@ -94,15 +91,7 @@ void main() {
 						mov min, eax			// (min = a[j])
 						mov eax, j				// (EAX = j)
 						mov minPosition, eax	// (minPosition = j)
-						jmp xswap				// jump to "xswap" (to swap minimum value left in unsorted array to lowest unsorted index in "a")
-	}
-	// printf("minPosition = %d \n", minPosition);
-	// printf("i = %d \n", i);
-	// printf("j = %d \n", j);
-	// printf("n = %d \n", n);
-	// printf("\t\t\t\tfirst = %d \n", first);
-	// printf("\t\t\t\tsecond = %d \n", second);
-	__asm{
+						jmp topinner			// jump to "topinner" to finish checking the rest of the array
 		xswap:			mov eax, i				// (EAX = i)
 						mul four				// (i *= 4)
 						mov ebx, eax			// (EBX = i * 4) (multiplying by 4 is to move ahead one index position in the int array "a")
@@ -128,11 +117,7 @@ void main() {
 						cmp n, edx				// compare "n" (number of elements in "a" minus 1) to "i" (increments throughout program)
 						jg topouter				// if(n > i) then jump to "topouter" (top of outer for loop)
 						jmp printingloop		// jump to "printingloop" (the loop used to print out every element of the int array "a")
-	}
-
-	__asm {
 		printingloop:	mov i, 0				// (i = 0)
-						// sub n, 1 /*-------- <-- TEMPORARY FOR TESTING!!!!!!! "n" SHOULD ALREADY BE DECREMENTED BY 1!!!!!!! --------*/
 						mov eax, n				// (EAX = n)
 						cmp i, eax				// compare "i" (int counter variable) to "n" (number of elements in "a" minus 1)
 						jl printarray			// if(i < n) then jump to "printarray" (print the int array "a")
@@ -144,7 +129,9 @@ void main() {
 						mov current, eax		// (current = a[i])
 						mov edx, current		// (EDX = a[i]) (EDX register is used for input and output)
 	}
+
 	printf("%d, ", current);					// print to the terminal the value inside the int variable "current"
+
 	__asm {
 						mov eax, i				// (EAX = i)
 						cmp eax, n				// compare "i" (int counter variable) to "n" (number of elements in "a" minus 1)
@@ -154,57 +141,7 @@ void main() {
 						jmp printarray			// jump back up to the top of "printarray" (the printing array code)
 		doneprinting:	nop						// NO OPERATION (exit the program)
 	}
-
-	/*
-	// for loop to print out the now sorted int array, "a"
-	for (i = 0; i < n; i++) {
-		// print the current int element value, followed by a comma and a space to the terminal
-		printf("%d, ", a[i]);
-	}
-	*/
-	
-	/*
-	// for loop to loop through all the elements in the int array "a" and 
-		// store the minimum value in each loop in order to sort the array
-	for (i = 0; i < (n - 1); i++) {
-		// store the value in the current index of the int array "a" to the int variable "min" 
-		min = a[i];
-		// store the current value of the int counter variable "i" to the int variable "minPosition" 
-			// ("minPosition" stores the index of the current minimum value in the int array "a")
-		minPosition = i;
-
-		// inner for loop used to loop through the entire int array "a" and 
-			// find the minimum int value that hasn't been sorted yet
-		for (j = (i + 1); j < n; j++) {
-			// if statement to check if the current int element value is the smallest of the unsorted elements
-				// and store that value and index to their respective variables
-			if (a[j] < a[minPosition]) {
-				// store the int value of the minimum int element (that hasn't been sorted yet) 
-					// in the int array "a" to the int variable, "min"
-				min = a[j];
-				// store the index of the minimum value in the int array "a" that hasn't been sorted yet
-				minPosition = j;
-			}
-		}
-		// the next three steps swaps the int values around in order to put the int array "a" in ascending order
-		// store the value of the "i-th" element to the "temp" variable
-		temp = a[i];
-		// store the value at the "minPosition" index to the "i-th" index in the int array "a"
-		a[i] = a[minPosition];
-		// store the value of the "i-th" element (stored in "temp" variable) 
-			// to the "minPosition" index of the int array "a"
-		a[minPosition] = temp;
-	}
-
-	// for loop to print out the now sorted int array, "a"
-	for (i = 0; i < n; i++) {
-		// print the current int element value, followed by a comma and a space to the terminal
-		printf("%d, ", a[i]);
-	}
-	*/
 }
-
-
 
 /*
 Output:
